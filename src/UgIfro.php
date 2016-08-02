@@ -15,6 +15,7 @@ class UgIfro extends UnidadeGestora
         $this
             ->setCodigo('158148')
             ->setGestao('26421')
+            ->setCodigoCorrelacao('10428')
             ->setNomeUnidade('INST.FED.DE EDUC.,CIENC.E TEC.DE RONDONIA');
     }
 }

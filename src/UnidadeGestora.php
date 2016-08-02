@@ -26,22 +26,27 @@ class UnidadeGestora
 
 
     /**
+     * Construtor
+     *
      * @param $codigo
      * @param $gestao
      * @param $nomeUnidade
      * @param $codigoRecolhimento
+     * @param $codigoCorrelacao
      */
     function __construct(
         $codigo = null,
         $gestao = null,
         $nomeUnidade = null,
-        $codigoRecolhimento = null)
+        $codigoRecolhimento = null,
+        $codigoCorrelacao = null)
     {
         $this
             ->setCodigo($codigo)
             ->setGestao($gestao)
             ->setNomeUnidade($nomeUnidade)
-            ->setCodigoRecolhimento($codigoRecolhimento);
+            ->setCodigoRecolhimento($codigoRecolhimento)
+            ->setCodigoCorrelacao($codigoCorrelacao);
     }
 
     /**
@@ -117,15 +122,33 @@ class UnidadeGestora
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCodigoCorrelacao()
+    {
+        return $this->$codigoCorrelacao;
+    }
+
+    /**
+     * @param mixed $codigoRecolhimento
+     */
+    public function setCodigoCorrelacao($codigoCorrelacao)
+    {
+        $this->codigoCorrelacao = $codigoCorrelacao;
+
+        return $this;
+    }
+
     public function toArray()
     {
+        // TODO: Verificar necessidade de informar tambem o nome do recolhimento
         return [
             'codigo_favorecido'   => $this->getCodigo(),
             'gestao'              => $this->getGestao(),
             'nome_favorecido'     => $this->getNomeUnidade(),
             'codigo_recolhimento' => $this->getCodigoRecolhimento(),
-            // 'codigo_correlacao'   => 10428,
-            // TODO: Verificar necessidade de informar tambem o nome do recolhimento
+            'codigo_correlacao'   => $this->getCodigoCorrelacao()
         ];
     }
 }
