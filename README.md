@@ -40,6 +40,7 @@ está sendo gerado
 $ug = new UnidadeGestora();
 $ug->setCodigo('158148')
     ->setGestao('26421')
+    ->setCodigoCorrelacao('10428')
     ->setNomeUnidade('INST.FED.DE EDUC.,CIENC.E TEC.DE RONDONIA')
     ->setCodigoRecolhimento(R::TAXA_DE_INSCRICAO_EM_CONCURSO_PUBLICO);
 ```
