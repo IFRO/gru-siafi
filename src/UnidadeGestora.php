@@ -127,7 +127,7 @@ class UnidadeGestora
      */
     public function getCodigoCorrelacao()
     {
-        return $this->$codigoCorrelacao;
+        return $this->codigoCorrelacao;
     }
 
     /**
