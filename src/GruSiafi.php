@@ -1,9 +1,10 @@
 <?php
+
 namespace GruSiafi;
 
 /**
-*
-*/
+ *
+ */
 class GruSiafi
 {
     // TODO: get from config
@@ -124,5 +125,4 @@ class GruSiafi
 
         $this->client = new \GuzzleHttp\Client(['base_uri' => static::$baseUrl]);
     }
-
 }
