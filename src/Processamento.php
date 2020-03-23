@@ -110,21 +110,54 @@ class Retorno {
 
 class ArquivoRetorno
 {
-    const GRU_LINHA_REGEX = '/(?P<tipo_registro>\d{1})(?P<codigo_ug>\w{11})(?P<codigo_receita>\w{5})(?P<data_transferencia>\w{8})(?P<convenio>\w{17})(?P<id_titulo>\w{20})(?P<data_liquidacao>\w{8})(?P<valor_doc>\w{17})(?P<valor_desconto>\w{17})(?P<valor_deducoes>\w{17})(?P<valor_mora_multa>\w{17})(?P<valor_juros>\w{17})(?P<valor_acrescimos>\w{17})(?P<valor_total>\w{17})(?P<agente_finaceiro>\d{3})(?P<cod_regra_dados>\w{2})(?P<cod_apelido_ug>\w{5})(?P<mes_ano_competencia>\w{6})(?P<data_vencimento>\w{8})(?P<tipo_contribuinte>\d{1})(?P<id_contribuinte>\d{14})(?P<validacao_receita>\d{1})(?P<codigo_original_ug>\w{11})(?P<validacao_ug>\d{1})(?P<codigo_tipo_pagamento>\w{2})(?P<autenticacao>\w{20})(?P<livre>\w{32})/';
 
+    const GRU_LINHA_REGEX  = '/' .
+    '(?P<tipo_registro>\d{1})' .
+    '(?P<codigo_ug>\w{11})' .
+    '(?P<codigo_receita>\w{5})' .
+    '(?P<data_transferencia>\w{8})' .
+    '(?P<convenio>\w{17})' .
+    '(?P<id_titulo>\w{20})' .
+    '(?P<data_liquidacao>\w{8})' .
+    '(?P<valor_doc>\w{17})' .
+    '(?P<valor_desconto>\w{17})' .
+    '(?P<valor_deducoes>\w{17})' .
+    '(?P<valor_mora_multa>\w{17})' .
+    '(?P<valor_juros>\w{17})' .
+    '(?P<valor_acrescimos>\w{17})' .
+    '(?P<valor_total>\w{17})' .
+    '(?P<agente_finaceiro>\d{3})' .
+    '(?P<cod_regra_dados>\w{2})' .
+    '(?P<cod_apelido_ug>\w{5})' .
+    '(?P<mes_ano_competencia>\w{6})' .
+    '(?P<data_vencimento>\w{8})' .
+    '(?P<tipo_contribuinte>\d{1})' .
+    '(?P<id_contribuinte>\d{14})' .
+    '(?P<validacao_receita>\d{1})' .
+    '(?P<codigo_original_ug>\w{11})' .
+    '(?P<validacao_ug>\d{1})' .
+    '(?P<codigo_tipo_pagamento>\w{2})' .
+    '(?P<autenticacao>\w{20})' .
+    '(?P<livre>\w{32})' .
+    '/';
+
+    private $caminho_arquivo;
+    
     public function __construct($caminho_arquivo) {
-        $this->arquivo = fopen($caminho_arquivo,"r");
+        $this->caminho_arquivo = $caminho_arquivo;
     }
 
     public function processar() {
         $resultado = [];
 
-        while(! feof($this->arquivo))  {
-            preg_match(self::GRU_LINHA_REGEX, fgets($this->arquivo), $dados);
+        $arquivo = fopen($this->caminho_arquivo, "r");
+
+        while(! feof($arquivo))  {
+            preg_match(self::GRU_LINHA_REGEX, fgets($arquivo), $dados);
             $resultado[] = new Retorno($dados);
         }
     
-        fclose($this->arquivo);
+        fclose($arquivo);
         return $resultado;
     }
 }
